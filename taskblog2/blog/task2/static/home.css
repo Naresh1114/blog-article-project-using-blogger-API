@@ -1,0 +1,169 @@
+ :root{
+      --bg-1:#fff1f2;   /* rose-50 */
+      --bg-2:#fff7ed;   /* orange-50 */
+      --card:#ffffff;
+      --ink:#1f2937;    /* gray-800 */
+      --muted:#6b7280;  /* gray-500 */
+
+      /* Accents (no blues) */
+      --acc-1:#f97316;  /* orange */
+      --acc-2:#ef4444;  /* red */
+      --acc-3:#10b981;  /* emerald */
+      --acc-4:#ec4899;  /* pink */
+      --acc-5:#d946ef;  /* fuchsia */
+      --ring:#f59e0b;   /* amber */
+    }
+
+    /* Page background with warm radial tint */
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 700px at 10% -10%, #ffe4e6 0%, transparent 60%),
+        radial-gradient(1200px 700px at 110% 10%, #ffedd5 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      min-height:100dvh;
+    }
+
+    .container{
+      max-width:1100px;
+      margin-inline:auto;
+      padding: clamp(16px, 3vw, 32px);
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:24px;
+    }
+
+    .title{
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight:800;
+      letter-spacing: -0.02em;
+      line-height:1.1;
+      background: linear-gradient(90deg, var(--acc-1), var(--acc-2), var(--acc-5), var(--acc-3));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .subtitle{
+      font-size:0.95rem;
+      color:var(--muted);
+    }
+
+    /* Grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: clamp(14px, 2vw, 22px);
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+
+    /* Card */
+    .card{
+      position:relative;
+      border-radius:18px;
+      background: var(--card);
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.06),
+        0 8px 24px rgba(0,0,0,0.06);
+      padding:18px 16px 16px;
+      overflow:hidden;
+      isolation:isolate;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover{
+      transform: translateY(-3px);
+      box-shadow:
+        0 3px 10px rgba(0,0,0,0.07),
+        0 16px 36px rgba(0,0,0,0.10);
+    }
+
+    /* Decorative gradient stripe (no blue) */
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-1px -1px auto -1px;
+      height:6px;
+      background: linear-gradient(90deg, var(--acc-1), var(--acc-2), var(--acc-5), var(--acc-3));
+      filter:saturate(110%);
+      z-index:-1;
+    }
+
+    .card .post-title{
+      display:block;
+      font-weight:700;
+      font-size:1.05rem;
+      line-height:1.35;
+      margin-bottom:12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    /* Actions */
+    .actions{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:8px;
+    }
+
+    /* Remove default link blue globally */
+    a{ color:inherit; text-decoration:none; }
+
+    .btn{
+      --g: linear-gradient(90deg, var(--acc-1), var(--acc-2), var(--acc-5), var(--acc-3));
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      font-weight:700;
+      border-radius:999px;
+      background: var(--g);
+      background-size:300% 100%;
+      color:#fff;              /* ensure contrast */
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+      transition: background-position .25s ease, transform .15s ease, box-shadow .2s ease;
+      outline: none;
+      border: none;
+    }
+    .btn:hover{
+      background-position: 70% 0%;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.16);
+    }
+    .btn:focus-visible{
+      outline: 3px solid var(--ring);
+      outline-offset: 2px;
+    }
+
+    .pill{
+      font-size:0.75rem;
+      font-weight:700;
+      padding:6px 10px;
+      border-radius:999px;
+      background: #fef3c7;   /* amber-100 */
+      color:#92400e;         /* amber-800 */
+      border:1px solid #fde68a;
+      white-space:nowrap;
+    }
+
+    /* Fun alternating accents per card (no blue hues) */
+    .grid > li:nth-child(4n+1) .pill{ background:#fee2e2; border-color:#fecaca; color:#7f1d1d; }
+    .grid > li:nth-child(4n+2) .pill{ background:#ffe4e6; border-color:#fecdd3; color:#9f1239; }
+    .grid > li:nth-child(4n+3) .pill{ background:#f5f3ff; border-color:#e9d5ff; color:#6b21a8; } /* purple, not blue */
+    .grid > li:nth-child(4n+4) .pill{ background:#dcfce7; border-color:#bbf7d0; color:#065f46; }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .card, .btn{ transition:none; }
+    }

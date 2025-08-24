@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+     <div class="container">
+    <header>
+      <div>
+        <h1 class="title">Latest Posts</h1>
+        <div class="subtitle">Hand-picked articles with a warm, colorful vibe.</div>
+      </div>
+    </header>
+
+    <ul class="grid">
+      {% for item in items %}
+        <li class="card">
+          <span class="post-title" title="{{ item.title }}">{{ item.title|truncatechars:30 }}</span>
+
+          <div class="actions">
+            <span class="pill">Article</span>
+            <a class="btn" href="{% url 'final' id=item.id %}" aria-label="View details for {{ item.title }}">
+              <span>Detail</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                   viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M1 8a.75.75 0 0 1 .75-.75h10.69L9.22 4.03a.75.75 0 0 1 1.06-1.06l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 1 1-1.06-1.06l3.22-3.22H1.75A.75.75 0 0 1 1 8Z"/>
+              </svg>
+            </a>
+          </div>
+        </li>
+      {% empty %}   
+        <li class="card">
+          <span class="post-title">No posts available</span>
+          <div class="actions">
+            <span class="pill">Empty</span>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
